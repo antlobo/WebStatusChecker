@@ -1,0 +1,82 @@
+{% extends 'admin/base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Service{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input name="name" id="name" required class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input name="description" id="description" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="url" class="form-label">URL</label>
+    <input name="url" id="url" required class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="route" class="form-label">Route</label>
+    <input name="route" id="route" required class="form-control" aria-describedby="routeHelpBlock">
+    <div id="routeHelpBlock" class="form-text">
+      <pre>
+Pattern variables correspond to:
+&lt;action&gt;: write, click, obtain, blank
+&lt;tag_name&gt;: html element like input, a, div, etc...
+&lt;tag_attribute&gt;: id, class, name
+&lt;attribute_value&gt;: attribute value as found in the html
+e.g.: write:input:id:login_user
+e.g.: click:input:name:login_button
+e.g.: obtain:div:class:infoContainer
+Ensure that the chosen attributes identify a single element in the html page
+      </pre>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="user" class="form-label">User</label>
+    <input name="user" id="user" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="text" name="password" id="password" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="type" class="form-label">Type:</label>
+    <select id="type" name="type" class="form-select" required>
+      <option value="temperature_sensor" selected>Temperature sensor</option>
+      <option value="water_sensor">Water sensor</option>
+      <option value="web">Web</option>
+      <option value="zabbix" disabled>Zabbix</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="other_data1" class="form-label">Other data 1</label>
+    <input name="other_data1" id="other_data1" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="other_data2" class="form-label">Other data 2</label>
+      <input name="other_data2" id="other_data2" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="other_data3" class="form-label">Other data 3</label>
+    <input name="other_data3" id="other_data3" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="other_data4" class="form-label">Other data 4</label>
+    <input name="other_data4" id="other_data4" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="other_data5" class="form-label">Other data 5</label>
+    <input name="other_data5" id="other_data5" class="form-control">
+  </div>
+  <input class="btn btn-dark" type="submit" value="Create service">
+  </form>
+{% endblock %}

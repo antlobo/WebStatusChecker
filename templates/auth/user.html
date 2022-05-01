@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ g.user.name }}
+{% endblock %}
+
+{% block header %}
+    Update - {{ g.user.name }}
+{% endblock %}
+
+{% block content %}
+{% if g.user %}
+<form method="post" action="{{ url_for('auth.update_user') }}">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" id="email" name="email"
+            value="{{ g.user.email }}" class="form-control-plaintext" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="role" class="form-label">Role:</label>
+        <input type="text" id="role" name="role"
+            value="{{ g.user.role }}" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="old-password" class="form-label">Old password:</label>
+        <input type="password" id="old-password" name="old-password" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="new-password" class="form-label">New password:</label>
+        <input type="password" id="new-password" name="new-password" class="form-control">
+    </div>
+    <input class="btn btn-dark" type="submit" value="Update">
+</form>
+{% endif %}
+{% endblock %}

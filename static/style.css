@@ -1,0 +1,21 @@
+html {
+  font-family: sans-serif;
+}
+
+#title {
+  padding: 2rem 4rem;
+}
+
+#toasts {
+  padding: 2rem 4rem;
+}
+
+body {
+  margin: 0 auto;
+  background: white;
+}
+
+.content {
+  padding: 1rem 4rem;
+}
+

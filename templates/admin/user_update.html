@@ -1,0 +1,42 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}
+    {% if user %} {{ user.name }}
+    {% else %} User Test
+    {% endif %}
+{% endblock %}
+
+{% block header %}
+    Update -
+    {% if user %} {{ user.name }}
+    {% else %} User Test
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<form id="form" method="post">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" id="email" name="email"
+            value="{{ user.email }}" class="form-control-plaintext" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" name="name"
+            value="{{ user.name }}" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="role" class="form-label">Role:</label>
+        <input type="text" id="role" name="role"
+            value="{{ user.role }}" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="type" class="form-label">Type:</label>
+        <select id="type" name="type" class="form-select">
+            <option value="admin" {% if user.type_ == 'admin' %} selected {% endif %}>Admin</option>
+            <option value="user" {% if user.type_ == 'user' %} selected {% endif %}>User</option>
+        </select>
+    </div>
+    <input class="btn btn-dark" type="submit" value="Update" onclick="update_user({{user.id}}); return false;">
+</form>
+{% endblock %}

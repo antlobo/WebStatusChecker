@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block header %}
+    Home
+{% endblock %}
+
+{% block navbar_search %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <input id="searchbar" name="searchbar" class="form-control me-2" placeholder="Search" type="text" aria-label="Search" onkeyup="searchbar()">
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+{% if services %}
+<div class="row row-cols-1 row-cols-md-2 g-4" id="data">
+    {% for service in services %}
+    <div class="col">
+        <div class="card">
+            <div class="card-header {% if service.status == 'inactive' %} bg-light {% else %} bg-dark {% endif %}">
+                <h5 class="card-title {% if service.status == 'inactive' %} text-dark {% else %} text-white {% endif %}">{{ service.name }}{% if service.status == 'inactive' %} <span class="badge rounded-pill bg-secondary">Disabled</span> {% endif %}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ service.description }}</p>
+                <a href="{{ url_for('views.service', app_id=service.app_id) }}" class="card-link btn btn-dark">Show</a>
+            </div>
+            <div class="card-footer">
+                {% if service.app_id in last_time_online.keys() %}
+                <small class="text-muted">Last time online: {{ last_time_online.get(service.app_id) | last_online}} </small>
+                {% else %}
+                <small class="text-muted">Last time online: Never </small>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

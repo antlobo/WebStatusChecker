@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Users
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a href="{{ url_for('admin.list_users') }}" class="dropdown-item"> List </a></li>
+            <li><a href="{{ url_for('admin.add_user') }}" class="dropdown-item"> Add user </a></li>
+            <li><a href="{{ url_for('admin.list_users') }}" class="dropdown-item"> Disable user </a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Services
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+            <li><a href="{{ url_for('admin.list_services') }}" class="dropdown-item"> List </a></li>
+            <li><a href="{{ url_for('admin.add_service') }}" class="dropdown-item"> Add service </a></li>
+            <li><a href="{{ url_for('admin.list_services') }}" class="dropdown-item"> Disable service </a></li>
+        </ul>
+    </li>
+{% endblock %}

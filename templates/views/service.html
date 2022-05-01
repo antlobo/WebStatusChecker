@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if service %} {{ service.name }}
+    {% else %} Service Test
+    {% endif %}
+{% endblock %}
+
+{% block header %}
+    {% if service %} {{ service.name }}
+    {% else %} Service Test
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<form method="post" id="form">
+    <div class="mb-3">
+        <label for="start" class="form-label">Start date:</label>
+        <input type="date" id="start" name="log-start" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="end" class="form-label">End date:</label>
+        <input type="date" id="end" name="log-end" class="form-control">
+    </div>
+    <input class="btn btn-dark" type="submit" value="Apply filter" onclick="get_service_information({{ service.app_id }}); return false;">
+</form>
+
+<section id="chart">
+    <div id='plot_chart' class='chart'></div>
+</section>
+
+<section id="table"></section>
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>-->
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}
+    Services
+{% endblock %}
+
+{% block header %}
+    Services
+{% endblock %}
+
+{% block navbar_search %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <input id="searchbar" name="searchbar" class="form-control me-2" placeholder="Search" type="text" aria-label="Search" onkeyup="searchbar()">
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+{% if services %}
+<div class="row row-cols-1 row-cols-md-2 g-4" id="data">
+  {% for service in services %}
+  <div class="col">
+    <div class="card" id="{{ service.app_id }}">
+      <div class="card-header {% if service.status == 'inactive' %} bg-light {% else %} bg-dark {% endif %}">
+          <h5 class="card-title {% if service.status == 'inactive' %} text-dark {% else %} text-white {% endif %}">{{ service.name }} {% if service.status == 'inactive' %}<span class="badge rounded-pill bg-secondary">Disabled</span>{% endif %}</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">URL: {{ service.url }} <br> Route: {{ service.route }} <br> User: {{ service.user }} <br>
+            Password: {{ service.password }} <br> Type: {{ service.app_type }} <br> Other data 1: {{ service.other_data1 }} <br>
+            Other data 2: {{ service.other_data2 }} <br> Other data 3: {{ service.other_data3 }} <br> Other data 4: {{ service.other_data4 }} <br>
+            Other data 5: {{ service.other_data5 }} <br>
+        </p>
+        <a href="{{ url_for('admin.show_service', app_id=service.app_id) }}" class="card-link">Update</a>
+        <a class="card-link update_status" href="#" onclick="change_service_status({{service.app_id}});return false;">{% if service.status == 'active' %}Disable {% else %} Enable {% endif %}</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

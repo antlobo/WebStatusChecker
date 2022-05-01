@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+<div class="d-flex justify-content-center cover">
+    <h1> {{ text.name }} <small> {{ text.code }} </small></h1>
+</div>
+<div class="d-flex justify-content-center cover">
+    <p class="lead">{{ text.description }}</p>
+</div>
+<!--<% if (vars.footer){ %><footer><p><%- vars.footer %></p></footer><% } %>-->
+{% endblock %}

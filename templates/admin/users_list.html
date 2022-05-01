@@ -1,0 +1,40 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}
+    Users
+{% endblock %}
+
+{% block header %}
+    Users
+{% endblock %}
+
+{% block navbar_search %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <input id="searchbar" name="searchbar" class="form-control me-2" placeholder="Search" type="text" aria-label="Search" onkeyup="searchbar()">
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+{% if users %}
+<div class="row row-cols-1 row-cols-md-2 g-4" id="data">
+  {% for user in users %}
+  <div class="col">
+    <div class="card" id="{{ user.id }}">
+      <div class="card-header {% if user.status == 'inactive' %} bg-light {% else %} bg-dark {% endif %}">
+          <h5 class="card-title {% if user.status == 'inactive' %} text-dark {% else %} text-white {% endif %}">{{ user.name }} {% if user.status == 'inactive' %} <span class="badge rounded-pill bg-secondary">Disabled</span> {% endif %}</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Email: {{ user.email }} <br> Role: {{ user.role }} <br> Type: {{ user.type_ }}</p>
+        <a href="{{ url_for('admin.show_user', user_id=user.id) }}" class="card-link">Update</a>
+        {% if g.user.id != user.id %}
+          <a class="card-link update_status" href="#" onclick="change_user_status({{user.id}});return false;">{% if user.status == 'active' %} Disable {% else %} Enable {% endif %}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

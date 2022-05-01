@@ -1,0 +1,8 @@
+*.log
+.env
+.db
+test.py
+#Ignores venv
+venv
+.idea
+__pycache__

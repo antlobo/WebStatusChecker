@@ -1,0 +1,64 @@
+<!doctype html>
+<head>
+  <title>
+    WSC - {% block title %}{% endblock %}
+  </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('views.index') }}">WSC<small class="text-muted"><sub>by</sub>ALO</small></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a href="{{ url_for('views.index') }}" class="nav-link">Home</a>
+            {% if g.user %}
+              {% if g.user.type_ == "admin" %}
+              <li class="nav-item"><a href="{{ url_for('admin.index') }}" class="nav-link">Admin Panel</a>
+              {% endif %}
+            {% endif %}
+            {% block navbar %}
+            {% endblock %}
+          </ul>
+            {% block navbar_search %}
+            {% endblock %}
+          <ul class="nav navbar-nav navbar-right">
+          {% if g.user %}
+            <li class="nav-item"><a href="{{ url_for('auth.user') }}" class="nav-link" style="color:white;"> {{ g.user.name }} </a>
+            <li class="nav-item"><a href="{{ url_for('auth.logout') }}" class="nav-link">Log Out</a>
+          {% else %}
+            <li class="nav-item"><a href="{{ url_for('auth.login') }}" class="nav-link">Log In</a>
+          {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div id="title">
+    <h1>{% block header %}{% endblock %}</h1>
+  </div>
+  <section class="content">
+    <div id="toasts" class="toast-container position-absolute bottom-0 end-0">
+    {% for message in get_flashed_messages() %}
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-white bg-dark border-0">
+          <strong class="me-auto">WSC</strong>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          {{ message }}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    {% block content %}{% endblock %}
+  </section>
+  <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+</body>
